@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nova — Launch Something Great</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0e0c;
+      --paper: #f5f2ec;
+      --accent: #d4522a;
+      --muted: #7a7570;
+      --border: #ddd9d0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 4rem;
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown 0.6s ease both;
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    nav ul a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--ink); }
+    .nav-cta {
+      background: var(--ink);
+      color: var(--paper) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      font-weight: 500 !important;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--paper) !important; }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 6rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero-text { animation: fadeUp 0.8s 0.2s ease both; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+    .btn-group { display: flex; gap: 1rem; align-items: center; }
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.85rem 2rem;
+      border: none;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-secondary {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--ink); }
+
+    /* HERO VISUAL */
+    .hero-visual {
+      animation: fadeUp 0.8s 0.4s ease both;
+      position: relative;
+    }
+    .card-stack {
+      position: relative;
+      height: 380px;
+    }
+    .card {
+      position: absolute;
+      border-radius: 20px;
+      padding: 2rem;
+    }
+    .card-back {
+      width: 80%;
+      height: 85%;
+      background: var(--accent);
+      top: 8%;
+      right: 0;
+      opacity: 0.15;
+      transform: rotate(4deg);
+    }
+    .card-main {
+      width: 90%;
+      height: 88%;
+      background: var(--ink);
+      color: var(--paper);
+      top: 6%;
+      left: 0;
+      transform: rotate(-1deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    .card-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.5rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .card-number span { color: var(--accent); }
+    .card-tag {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 5rem 4rem;
+      border-top: 1px solid var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .feature {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: border-color 0.2s, transform 0.2s;
+      animation: fadeUp 0.7s ease both;
+    }
+    .feature:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .feature:nth-child(2) { animation-delay: 0.1s; }
+    .feature:nth-child(3) { animation-delay: 0.2s; }
+    .feat-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--ink);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .feature h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.6rem;
+    }
+    .feature p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      nav ul { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2.5rem; }
+      .features { padding: 3rem 1.5rem; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">No<span>.</span>va</div>
+    <ul>
+      <li><a href="#">Product</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Now in public beta</span>
+      <h1>Build things that <em>actually</em> matter.</h1>
+      <p>Nova gives your team the tools to move fast, stay focused, and ship work you're proud of — without the usual noise.</p>
+      <div class="btn-group">
+        <button class="btn-primary">Start for free</button>
+        <button class="btn-secondary">See how it works →</button>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="card-stack">
+        <div class="card card-back"></div>
+        <div class="card card-main">
+          <div>
+            <div class="card-label">Active projects</div>
+            <div class="card-number">24<span>.</span></div>
+          </div>
+          <div>
+            <div class="card-label" style="margin-bottom:0.5rem">Current sprint</div>
+            <span class="card-tag">🚀 Q3 Launch</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feat-icon">⚡</div>
+        <h3>Fast by default</h3>
+        <p>Everything is optimized out of the box. No configuration required to get blazing-fast performance.</p>
+      </div>
+      <div class="feature">
+        <div class="feat-icon">🔒</div>
+        <h3>Secure & private</h3>
+        <p>Your data is encrypted end-to-end. We never sell, share, or analyze what you create.</p>
+      </div>
+      <div class="feature">
+        <div class="feat-icon">🤝</div>
+        <h3>Built for teams</h3>
+        <p>Real-time collaboration, roles, and permissions so everyone can work together seamlessly.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Nova Inc. · Built with care.
+  </footer>
+
+</body>
+</html>
